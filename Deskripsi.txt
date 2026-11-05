@@ -1,0 +1,57 @@
+Aplikasi Learning Management System (LMS) untuk pembelajaran jarak jauh (PJJ) di sekolah, dibangun dengan Laravel 12 dan MySQL. Bisa dipakai untuk jenjang SD, SMP, SMA, maupun SMK dengan tiga peran: admin sekolah, guru, dan siswa. Guru mengunggah materi per pertemuan, membuka presensi daring, memberi tugas, dan membuat kuis online; siswa belajar, presensi, mengumpulkan tugas, dan mengerjakan kuis dari HP; admin memantau kehadiran, keaktifan, dan leger nilai seluruh kelas.
+Cara kerja
+Admin sekolah mengisi data kelas, mata pelajaran, guru, dan siswa (bisa impor CSV), lalu membagi tugas mengajar. Setiap mapel di satu kelas menjadi satu ruang belajar yang diampu seorang guru, lengkap dengan jadwal mingguan dan link kelas daring. Jenjang sekolah dipilih di pengaturan sehingga pilihan tingkat kelas menyesuaikan (SD 1-6, SMP 7-9, SMA/SMK 10-12) dan menu jurusan muncul untuk SMA/SMK.
+
+Di ruang belajar, guru membuat pertemuan berisi materi teks, video YouTube, dan lampiran. Pertemuan bisa membuka presensi daring pada jam tertentu: siswa menekan tombol Saya hadir, siswa yang tidak presensi sampai jam tutup otomatis tercatat alpa, dan guru bisa mengubahnya menjadi izin atau sakit. Tugas punya tenggat; pengumpulan terlambat ditandai otomatis dan guru menilai satu per satu dengan komentar.
+
+Kuis online mendukung pilihan ganda yang dinilai otomatis dan esai yang dikoreksi guru, dengan acak soal dan opsi, batas waktu, jawaban tersimpan otomatis setiap kali siswa memilih, dan pengumpulan otomatis saat waktu habis. Guru melihat analisis butir soal untuk mengetahui soal yang sulit.
+
+Nilai akhir tiap mapel dihitung dari rata-rata tugas, kuis, dan persentase kehadiran sesuai bobot yang diatur guru, lalu dibandingkan dengan KKM. Admin melihat dashboard kehadiran PJJ hari ini per kelas, ruang belajar yang belum mengunggah materi, rekap presensi bulanan, leger nilai satu kelas, dan pantauan keaktifan siswa.
+Fitur
+Satu aplikasi untuk SD, SMP, SMA, dan SMK: tingkat kelas dan menu jurusan menyesuaikan jenjang
+Tiga peran: admin sekolah, guru, siswa; login memakai NIP / NISN
+Ruang belajar per mapel per kelas dengan tab Materi, Tugas, Kuis, Presensi, Nilai, Diskusi, Anggota
+Materi per pertemuan: teks, video YouTube ter-embed, lampiran PDF/Word/PowerPoint/Excel
+Presensi daring dengan jam buka-tutup, otomatis alpa bila tidak presensi, guru bisa set izin/sakit
+Tugas dengan tenggat, pengumpulan file atau teks, tanda terlambat otomatis, nilai & komentar guru
+Penilaian tugas cepat: simpan nilai lalu otomatis lanjut ke siswa berikutnya
+Kuis online pilihan ganda (nilai otomatis) dan esai (dikoreksi guru) dengan bobot per soal
+Acak soal dan opsi, timer, simpan jawaban otomatis, kumpul otomatis saat waktu habis
+Impor banyak soal sekaligus dari teks (salin dari Word / Google Docs)
+Analisis butir soal: persentase jawaban benar dan sebaran pilihan tiap soal
+Nilai akhir otomatis dari tugas, kuis, dan kehadiran sesuai bobot, dibandingkan KKM
+Rekap nilai per ruang dan leger nilai satu kelas, unduh CSV / cetak
+Rekap presensi bulanan per kelas dan pantauan keaktifan siswa
+Jadwal pelajaran mingguan dengan link Google Meet / Zoom dan pencegahan jadwal bentrok
+Pengumuman untuk semua, guru, siswa, atau kelas tertentu (bisa disematkan)
+Diskusi tanya jawab guru dan siswa di setiap ruang belajar
+Tahun ajaran & semester, salin pembagian mengajar ke semester baru
+Impor guru & siswa dari CSV (Excel), reset password, nonaktifkan akun
+Berkas tersimpan di storage privat, hanya bisa diunduh oleh yang berhak
+Tampilan responsif, nyaman dibuka siswa dari HP
+Data contoh lengkap: 5 kelas, 10 guru, 120 siswa, materi, presensi, tugas, dan kuis
+Panduan instalasi
+Kebutuhan: PHP 8.2 atau lebih baru (XAMPP 8.2+ / Laragon), MySQL/MariaDB, dan Composer (Laragon sudah menyertakannya).
+
+Ekstrak ZIP lalu pindahkan folder lms-pjj ke C:\xampp\htdocs\lms-pjj (atau C:\laragon\www\lms-pjj).
+
+Jalankan Apache dan MySQL, buka http://localhost/phpmyadmin, lalu buat database baru bernama lms_pjj.
+
+Jalankan setup:
+
+Windows: klik dua kali setup.bat (atau buka Shell di XAMPP Control Panel, masuk ke folder project, lalu ketik setup.bat).
+Linux/macOS: bash setup.sh
+Script ini menjalankan composer install (jika folder vendor belum ada), membuat file .env, kunci aplikasi, tabel database, dan data contoh sekolah.
+
+Buka http://localhost/lms-pjj lalu login:
+
+Admin sekolah: admin / admin123
+Guru: guru / guru123
+Siswa: siswa / siswa123
+Untuk jenjang SD/SMP/SMA, login sebagai admin lalu ubah nama sekolah dan jenjang di menu Pengaturan.
+
+Tanpa XAMPP: dari folder project jalankan bash setup.sh lalu php artisan serve, buka http://127.0.0.1:8000.
+
+Jika user/password MySQL berbeda, ubah DB_USERNAME dan DB_PASSWORD di file .env lalu jalankan setup lagi.
+
+Untuk hosting: arahkan document root ke folder public/, ubah APP_ENV=production, APP_DEBUG=false, dan APP_URL di .env, lalu ganti password admin.
